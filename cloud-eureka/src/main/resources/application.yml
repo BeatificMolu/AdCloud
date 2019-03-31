@@ -1,0 +1,61 @@
+spring:
+  application:
+    name: cloud-eureka
+
+server:
+  port: 8001
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+---
+#spring:
+#  application:
+#    name: cloud-eureka
+#  profiles: eureka-server-1
+#server:
+#  port: 8001
+#eureka:
+#  instance:
+#    hostname: eureka1
+#    prefer-ip-address: false
+#  client:
+#    service-url:
+#      defaultZone: http://eureka2:8002/eureka/,http://eureka3:8003/eureka/
+
+---
+#spring:
+#  application:
+#    name: cloud-eureka
+#  profiles: eureka-server-2
+#server:
+#  port: 8002
+#eureka:
+#  instance:
+#    hostname: eureka2
+#    prefer-ip-address: false
+#  client:
+#    service-url:
+#      defaultZone: http://eureka1:8001/eureka/,http://eureka3:8003/eureka/
+
+---
+
+#spring:
+#  application:
+#    name: cloud-eureka
+#  profiles: eureka-server-3
+#server:
+#  port: 8003
+#eureka:
+#  instance:
+#    hostname: eureka3
+#    prefer-ip-address: false
+#  client:
+#    service-url:
+#      defaultZone: http://eureka1:8002/eureka/,http://eureka1:8001/eureka/

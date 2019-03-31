@@ -1,0 +1,9 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: ad-zuul
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1:8001/eureka/

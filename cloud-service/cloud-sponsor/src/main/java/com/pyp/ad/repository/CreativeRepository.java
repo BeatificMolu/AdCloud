@@ -10,5 +10,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @modifier:
  * @version: V1.0
  */
-public interface CreativeRepository extends JpaRepository<Creative,Long> {
+public interface CreativeRepository extends JpaRepository<Creative, Long> {
+    /**
+     * 通过名称查找用户的创意
+     *
+     * @param name
+     * @param userId
+     * @return
+     */
+    Creative findByNameAndUserId(String name, Long userId);
 }

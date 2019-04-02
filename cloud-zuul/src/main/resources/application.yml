@@ -7,3 +7,11 @@ eureka:
   client:
     service-url:
       defaultZone: http://eureka1:8001/eureka/
+
+zuul:
+  prefix: /pyp
+  routes:
+    sponsor:
+      path: /pyp-sponsor/**
+      serviceId: pyp-ad-sponsor
+      strip-prefix: false

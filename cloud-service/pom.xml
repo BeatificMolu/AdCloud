@@ -12,6 +12,7 @@
     <modules>
         <module>cloud-common</module>
         <module>cloud-sponsor</module>
+        <module>cloud-search</module>
     </modules>
     <artifactId>cloud-service</artifactId>
     <packaging>pom</packaging>

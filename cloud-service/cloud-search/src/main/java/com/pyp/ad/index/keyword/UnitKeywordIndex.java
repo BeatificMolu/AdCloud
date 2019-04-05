@@ -24,7 +24,7 @@ import java.util.concurrent.ConcurrentSkipListSet;
  */
 @Slf4j
 @Component
-public class UnitKeyword implements IndexAware<String, Set<Long>> {
+public class UnitKeywordIndex implements IndexAware<String, Set<Long>> {
     /**
      * 关键词到推广单元的限制
      */

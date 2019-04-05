@@ -14,4 +14,15 @@ public class CommonUtils {
     public static <K, V> V getorCreate(K key, Map<K, V> map, Supplier<V> factory) {
         return map.computeIfAbsent(key, k -> factory.get());
     }
+
+    public static String stringConcat(String... args) {
+        if (args.length > 0) {
+            StringBuilder sb = new StringBuilder();
+            for (String arg : args) {
+                sb.append(arg);
+            }
+            return sb.toString();
+        }
+        return null;
+    }
 }

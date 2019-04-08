@@ -16,9 +16,9 @@ public class Constant {
         public static final String TABLE_NAME="plan";
         public static final String COLUMN_ID="id";
         public static final String COLUMN_USER_ID="user_id";
-        public static final String COLUMN_plan_STATUS="plan_status";
-        public static final String COLUMN_start_date="start_date";
-        public static final String COLUMN_end_date="enbd_date";
+        public static final String COLUMN_PLAN_STATUS="plan_status";
+        public static final String COLUMN_START_DATE="start_date";
+        public static final String COLUMN_END_DATE="enbd_date";
     }
     public static class AD_CREATIVE_TABLE_INFO {
 

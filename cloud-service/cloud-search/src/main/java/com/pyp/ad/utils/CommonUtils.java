@@ -1,5 +1,11 @@
 package com.pyp.ad.utils;
 
+import org.apache.commons.lang.time.DateUtils;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -24,5 +30,20 @@ public class CommonUtils {
             return sb.toString();
         }
         return null;
+    }
+
+    /**
+     * 根据特定的日期格式解析成date对象
+     *
+     * @param dateString
+     * @return
+     */
+    public static Date parseStrinDate(String dateString) {
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyy", Locale.US);
+            return DateUtils.addHours(dateFormat.parse(dateString), -8);
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 }

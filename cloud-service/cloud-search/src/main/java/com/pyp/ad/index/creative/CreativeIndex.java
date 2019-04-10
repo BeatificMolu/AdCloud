@@ -3,10 +3,11 @@ package com.pyp.ad.index.creative;
 import com.pyp.ad.index.IndexAware;
 import com.pyp.ad.index.unit.UnitObject;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.Size;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -55,5 +56,21 @@ public class CreativeIndex implements IndexAware<Long, CreativeObject> {
         log.info("before delete: {}", objectMap);
         objectMap.remove(key);
         log.info("after delete: {}", objectMap);
+    }
+
+    public List<CreativeObject> fetch(Collection<Long> adIds) {
+        if (CollectionUtils.isEmpty(adIds)) {
+            return Collections.emptyList();
+        }
+        List<CreativeObject> objects = new ArrayList<>();
+        for (Long id : adIds) {
+            CreativeObject object = get(id);
+            if (object == null) {
+                log.error("CreativeObject not found: {}", id);
+                return Collections.emptyList();
+            }
+            objects.add(object);
+        }
+        return objects;
     }
 }

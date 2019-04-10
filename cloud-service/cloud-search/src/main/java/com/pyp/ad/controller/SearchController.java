@@ -5,6 +5,9 @@ import com.pyp.ad.annotation.IgnoreResponseAdvice;
 import com.pyp.ad.client.SponsorClient;
 import com.pyp.ad.client.vo.Plan;
 import com.pyp.ad.client.vo.PlanGetRequest;
+import com.pyp.ad.search.ISearch;
+import com.pyp.ad.search.vo.SearchRequest;
+import com.pyp.ad.search.vo.SearchResponse;
 import com.pyp.ad.vo.CommonResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,16 +27,21 @@ import java.util.List;
 @Slf4j
 @SuppressWarnings("all")
 public class SearchController {
-
+    private final ISearch iSearch;
     private final RestTemplate restTemplate;
     private final SponsorClient sponsorClient;
 
     @Autowired
-    public SearchController(RestTemplate restTemplate, SponsorClient sponsorClient) {
+    public SearchController(ISearch iSearch, RestTemplate restTemplate, SponsorClient sponsorClient) {
+        this.iSearch = iSearch;
         this.restTemplate = restTemplate;
         this.sponsorClient = sponsorClient;
     }
-
+    @PostMapping("/fetchAds")
+    public SearchResponse fetchAds(@RequestBody SearchRequest request){
+        log.info("ad-search: fetchAds -> {}",JSON.toJSON(request));
+        return iSearch.fetchAds(request);
+    }
     @PostMapping("/getPlanByRibbon")
     @IgnoreResponseAdvice
     public CommonResponse<List<Plan>> getPlanByRibbon(@RequestBody PlanGetRequest request) {

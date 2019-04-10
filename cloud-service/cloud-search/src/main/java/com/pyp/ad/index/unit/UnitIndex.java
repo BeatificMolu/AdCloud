@@ -2,9 +2,10 @@ package com.pyp.ad.index.unit;
 
 import com.pyp.ad.index.IndexAware;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -21,6 +22,32 @@ public class UnitIndex implements IndexAware<Long, UnitObject> {
 
     static {
         objectMap = new ConcurrentHashMap<>();
+    }
+
+    public Set<Long> match(Integer positionType) {
+        Set<Long> adUnitIds = new HashSet<>();
+        objectMap.forEach((k, v) -> {
+            if (UnitObject.isAdSlotTypeOK(positionType, v.getPositionType())) {
+                adUnitIds.add(k);
+            }
+        });
+        return adUnitIds;
+    }
+
+    public List<UnitObject> fetch(Collection<Long> unitIds) {
+        if (CollectionUtils.isEmpty(unitIds)) {
+            return Collections.EMPTY_LIST;
+        }
+        List<UnitObject> result = new ArrayList<>();
+        unitIds.forEach(u -> {
+            UnitObject object = get(u);
+            if (object == null) {
+                log.error("UnitObject is not found: {}", u);
+                return;
+            }
+            result.add(object);
+        });
+        return result;
     }
 
     @Override

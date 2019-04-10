@@ -39,4 +39,49 @@ public class UnitObject {
             this.planObject = newObject.getPlanObject();
         }
     }
+
+    /**
+     * 判读流量类型
+     *
+     * @param positionType
+     * @return
+     */
+    private static boolean isKaiPing(int positionType) {
+        return (positionType & UnitConstants.POSITION_TYPE.KAIPING) > 0;
+    }
+
+    private static boolean isTiePian(int positionType) {
+        return (positionType & UnitConstants.POSITION_TYPE.TIEPIAN) > 0;
+    }
+
+    private static boolean isTiePianMiddle(int positionType) {
+        return (positionType & UnitConstants.POSITION_TYPE.TIEPIAN_MIDDLE) > 0;
+    }
+
+    private static boolean isTiePianPause(int positionType) {
+        return (positionType & UnitConstants.POSITION_TYPE.TIEPIAN_PAUSE) > 0;
+    }
+
+    private static boolean isTiePianPost(int positionType) {
+        return (positionType & UnitConstants.POSITION_TYPE.TIEPIAN_POST) > 0;
+    }
+
+    public static boolean isAdSlotTypeOK(int adSlodType, int positionType) {
+        switch (adSlodType) {
+            case UnitConstants.POSITION_TYPE.KAIPING:
+                return isKaiPing(positionType);
+            case UnitConstants.POSITION_TYPE.TIEPIAN_MIDDLE:
+                return isTiePianMiddle(positionType);
+            case UnitConstants.POSITION_TYPE.TIEPIAN_POST:
+                return isTiePianPost(positionType);
+            case UnitConstants.POSITION_TYPE.TIEPIAN_PAUSE:
+                return isTiePianPause(positionType);
+            case UnitConstants.POSITION_TYPE.TIEPIAN:
+                return isTiePian(positionType);
+            default:
+                return false;
+
+        }
+    }
+
 }

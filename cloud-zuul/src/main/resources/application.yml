@@ -15,3 +15,7 @@ zuul:
       path: /pyp-sponsor/**
       serviceId: pyp-ad-sponsor
       strip-prefix: false
+    search:
+      path: /pyp-search/**
+      serviceId: pyp-ad-search
+      strip-prefic: false

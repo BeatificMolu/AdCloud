@@ -1,13 +1,13 @@
 package com.pyp.ad.index.creativeunit;
 
 import com.pyp.ad.index.IndexAware;
+import com.pyp.ad.index.unit.UnitObject;
 import com.pyp.ad.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 
@@ -79,5 +79,19 @@ public class CreativeUnitIndex implements IndexAware<String, CreativeUnitObject>
         if (CollectionUtils.isNotEmpty(creativeSet)) {
             creativeSet.remove(value.getAdId());
         }
+    }
+
+    public List<Long> selectAds(List<UnitObject> objects) {
+        if (CollectionUtils.isEmpty(objects)) {
+            return Collections.emptyList();
+        }
+        List<Long> result = new ArrayList<>();
+        for (UnitObject object : objects) {
+            Set<Long> longs = unitCreativeMap.get(object.getUnitId());
+            if (CollectionUtils.isNotEmpty(longs)) {
+                result.addAll(longs);
+            }
+        }
+        return result;
     }
 }

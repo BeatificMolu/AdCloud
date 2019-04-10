@@ -1,6 +1,7 @@
 package com.pyp.ad.index.district;
 
 import com.pyp.ad.index.IndexAware;
+import com.pyp.ad.search.vo.Feature.DistrictFeature;
 import com.pyp.ad.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
@@ -11,6 +12,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListSet;
+import java.util.stream.Collectors;
 
 /**
  * @description:
@@ -70,6 +72,16 @@ public class UnitDistrictIndex implements IndexAware<String, Set<Long>> {
             if (CollectionUtils.isNotEmpty(keywords)) {
                 return CollectionUtils.isSubCollection(districts, keywords);
             }
+        }
+        return false;
+    }
+
+    public boolean match(List<DistrictFeature.ProvinceAndCity> districts, Long unitId) {
+        if (unitDistrictMap.containsKey(unitId) && CollectionUtils.isNotEmpty(unitDistrictMap.get(unitId))) {
+            Set<String> unitDistricts = unitDistrictMap.get(unitId);
+            List<String> targetDistricts = districts.stream()
+                    .map(d -> CommonUtils.stringConcat(d.getProvince(), d.getCity())).collect(Collectors.toList());
+            return CollectionUtils.isSubCollection(targetDistricts, unitDistricts);
         }
         return false;
     }

@@ -26,3 +26,4 @@ eureka:
   client:
     service-url:
       defaultZone: http://eureka1:8081/eureka/
+    enabled: false

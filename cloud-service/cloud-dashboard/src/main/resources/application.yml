@@ -1,0 +1,17 @@
+server:
+  port: 7002
+
+spring:
+  application:
+    name: pyp-ad-dashboard
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1:8001/eureka
+
+management:
+  endpoints:
+    web:
+      expposure:
+        include: "*"

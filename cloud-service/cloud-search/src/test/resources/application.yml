@@ -1,0 +1,53 @@
+server:
+  port: 7001
+  servlet:
+    context-path: /pyu-search
+
+spring:
+  application:
+    name: pyp-ad-search
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+      properties:
+        hibernate.format_sql: true
+      open-in-view: false
+  datasource:
+    url: jdbc:mysql://localhost:3306/pyp_ad?autoReconnect-true
+    username: root
+    passwrod: root
+    tomcat:
+      max-active: 4
+      min-idle: 2
+      initial-size: 2
+
+eureka:
+  client:
+    enabled: false
+    service-url:
+      defaultZone: http://eureka1:8001/eureka
+
+
+feigh:
+  hystrix:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      expposure:
+        include: "*"
+
+
+
+adconf:
+  mysql:
+    host: 127.0.0.1
+    port: 3306
+    username: root
+    password: root
+    binlogName: ""
+    position: -1
+  kafka:
+    topic: kafka-sender

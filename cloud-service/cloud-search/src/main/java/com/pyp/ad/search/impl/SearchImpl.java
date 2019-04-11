@@ -1,6 +1,7 @@
 package com.pyp.ad.search.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.pyp.ad.index.CommonStatus;
 import com.pyp.ad.index.DataTable;
 import com.pyp.ad.index.creative.CreativeIndex;
@@ -35,7 +36,12 @@ import java.util.*;
 @Slf4j
 @Service
 public class SearchImpl implements ISearch {
+    public SearchResponse fallback(SearchRequest request, Throwable e) {
+        return null;
+    }
+
     @Override
+    //@HystrixCommand(fallbackMethod = "fallback")
     public SearchResponse fetchAds(SearchRequest request) {
         List<AdSlot> adSlots = request.getRequestInfo().getAdSlots();
         KeywordFeature keywordFeature = request.getFeatureInfo().getKeywordFeature();
